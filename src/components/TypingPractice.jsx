@@ -5,8 +5,8 @@ import "./TypingPractice.sass"
 
 function TypingPractice() {
     // Should be either create/type
-    const [mode, setMode] = useState("type");
-    const [content, setContent] = useState("엄마가, 아빠가");
+    const [mode, setMode] = useState("create");
+    const [content, setContent] = useState("");
 
     return mode === "create" ? (
         <Create setMode={setMode} setContent={setContent} />

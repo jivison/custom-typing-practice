@@ -44,14 +44,6 @@ function Type({ content, setMode }) {
             .slice(0, value.length - 1)
             .join("");
 
-        console.log(`
-            Length change:                      ${Math.abs(renderedContent.length - value.length)}
-            Value:                              ${value}
-            ValueStore:                         ${valueStore}
-            ValueBut1:                          ${valueBut1}
-            ValueStoreBut1:                     ${valueStoreBut1}
-        `);
-
         // Refer to ifstatement.js for more details
         if (
             valueStore.length === value.length &&
@@ -64,7 +56,6 @@ function Type({ content, setMode }) {
             ) ||
                 Math.abs(renderedContent.length - value.length) > 1)
         ) {
-            console.log("Re-rendering");
             // Iterate over each character of the input, checking against the content (the master copy)
             // Set the style according to whether they match or not
             // (Re-rendering is very laggy, so it is only done when necessary)
@@ -110,7 +101,6 @@ function Type({ content, setMode }) {
                 // If the end of the input has changed, but the length is the same
                 // Re-render the last character
                 if (value.length !== 0 && lenStore === value.length) {
-                    console.log("In place re-render");
                     setRenderedContent([
                         ...renderedContent.slice(0, index),
                         <span
@@ -154,7 +144,9 @@ function Type({ content, setMode }) {
                     }
                     {content
                         .split("")
-                        .slice(renderedContent.length).join("").replace(/ /g, "\u0020")}
+                        .slice(renderedContent.length)
+                        .join("")
+                        .replace(/ /g, "\u0020")}
                 </span>
             </p>
             <div className="inputContainer">
@@ -167,7 +159,10 @@ function Type({ content, setMode }) {
                     type="text"
                     placeholder="Start typing here!"
                 />
-                <span className="count"> {renderedContent.length}/{content.length}</span>
+                <span className="count">
+                    {" "}
+                    {renderedContent.length}/{content.length}
+                </span>
             </div>
         </div>
     );
